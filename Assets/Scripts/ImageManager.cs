@@ -9,15 +9,15 @@ public class ImageManager : MonoBehaviour
     private GameObject hosePopup;
     [Header("Configuration")]
     [SerializeField]
-    private GameObject truckPopup;
+    private GameObject axePopup;
     [Header("Configuration")]
     [SerializeField]
-    private GameObject extinguisherPopup;
+    private GameObject hooliganPopup;
 
     // Start is called before the first frame update
     public void hideAllImages() {         
         hosePopup.SetActive(false);
-        truckPopup.SetActive(false);
-        extinguisherPopup.SetActive(false);
+        axePopup.SetActive(false);
+        hooliganPopup.SetActive(false);
     }
 }
