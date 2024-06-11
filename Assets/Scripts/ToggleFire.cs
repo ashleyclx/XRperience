@@ -5,47 +5,43 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class ToggleFire : MonoBehaviour
+
 {
     [SerializeField]
     GameObject InactiveFire;
+    [SerializeField]
+    GameObject ActiveFire;
 
-    public ParticleSystem part;
-    public List<ParticleCollisionEvent> collisionEvents;
-
-    void Start()
-    {
-        part = GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
-    }
+    public int numHits = 0;
 
     void OnParticleCollision(GameObject other)
     {
-        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-        Debug.Log($"Number of collision events: {numCollisionEvents}");
-
-        if (numCollisionEvents > 0)
+        numHits++;
+        Debug.Log("COLLISION");
+        if (numHits > 10)
         {
-            Debug.Log($"Collision detected with {other.name}");
-            InactiveFire.SetActive(false);
-            this.gameObject.SetActive(false);
+            InactiveFire.SetActive(true);
+            ActiveFire.SetActive(false);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("TRIGGER");
-        if (other.tag == "Water")
+        /*private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("WATER TRIGGER");
-            InactiveFire.SetActive(false);
-            this.gameObject.SetActive(false);
-        }
-    }
+            Console.WriteLine("TRIGGER");
+            if (other.tag == "Water")
+            {
+                Console.WriteLine("WATER TRIGGER");
+                InactiveFire.SetActive(true);
+                this.gameObject.SetActive(false);
+            }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("WATER COLLISION");
-        InactiveFire.SetActive(false);
-        this.gameObject.SetActive(false);
-    }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+
+            Console.WriteLine("WATER COLLISION");
+            InactiveFire.SetActive(true);
+            this.gameObject.SetActive(false);
+
+        }*/
 }
