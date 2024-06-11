@@ -9,24 +9,19 @@ public class ToggleFire : MonoBehaviour
 {
     [SerializeField]
     GameObject InactiveFire;
+    [SerializeField]
+    GameObject ActiveFire;
 
-    public ParticleSystem part;
-    public List<ParticleCollisionEvent> collisionEvents;
-
-    void Start()
-    {
-        part = GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
-    }
+    public int numHits = 0;
 
     void OnParticleCollision(GameObject other)
     {
-        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-
-        if (numCollisionEvents > 0)
+        numHits++;
+        Debug.Log("COLLISION");
+        if (numHits > 10)
         {
             InactiveFire.SetActive(true);
-            this.gameObject.SetActive(false);
+            ActiveFire.SetActive(false);
         }
     }
         /*private void OnTriggerEnter(Collider other)
